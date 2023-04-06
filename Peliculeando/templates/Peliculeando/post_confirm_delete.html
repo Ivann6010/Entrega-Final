@@ -1,0 +1,15 @@
+{% extends "Peliculeando/base.html" %}
+
+{% block main %}
+<br>
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+
+    <ul>
+    <li>Seguro que deseas borrar el post?
+    <input type="submit" value="Borrar"></li>
+    </ul>
+</form>
+
+{% endblock %}
