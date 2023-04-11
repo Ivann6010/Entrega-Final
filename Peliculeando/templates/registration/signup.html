@@ -1,16 +1,14 @@
 {% extends "Peliculeando/base.html" %}
 
+{% block title %} Sign Up | Peliculeando! {% endblock %}
+
 {% block main %}
-<br>
 <div style="margin-left: 10px;">
+<br><h1>REGISTRO</h1> <br>
 <form method="POST">
     {% csrf_token %}
-    {{form}}
-
-    
-    <h2>Seguro que deseas borrar el post? <input style="margin-left: 40px;" type="submit" value="Borrar"></h2>
-    
-    
+    {{form.as_p}}
+    <input type="submit" value="Registrarme">
 </form>
 </div>
 {% endblock %}

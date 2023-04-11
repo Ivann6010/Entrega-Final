@@ -1,5 +1,7 @@
 {% extends "Peliculeando/base.html" %}
 
+{% block title %} Peliculeando! {% endblock %}
+
 {% block main %}
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -111,10 +113,10 @@
   <!-- /END THE FEATURETTES -->INDEX.
 
 </div><!-- /.container -->
-
+<br>
 {% endblock %}
 
-{% block top %} <a href="{% url 'index' %}">Volver arriba</a> {% endblock %}
+{% block top %} <a href="{% url 'index' %}" style="text-decoration: none; color: #000; font-family: sans-serif;">Volver arriba</a> {% endblock %}
 
   
 

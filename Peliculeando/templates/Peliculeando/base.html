@@ -50,10 +50,10 @@
 </head>
 
 
-<body style="background-color:#fff9c7d7" >
+<body style="background-color:#f3f3f3f6; position: relative; padding-bottom: 4em; min-height: 100vh;" >
 <!-- HEADER -->
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: rgba(11, 3, 20, 0.986);">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">Peliculeando!  </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,19 +62,21 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'post-list' %}">Feed  </a>
+            <a class="nav-link" aria-current="page" href="{% url 'post-list' %}">Feed  </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" href="{% url 'post-create' %}">Postear  </a>
+            <a class="nav-link" href="{% url 'post-create' %}">Postear  </a>
             </li>
            <!-- <li class="nav-item">
             <a class="nav-link active" href="https://getbootstrap.com/docs/5.0/examples/carousel/#" tabindex="-1" aria-disabled="true">--  </a>
             </li> -->
         </ul>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+        {% if user.is_authenticated %}
+        <a class="nav-link" style="color: rgba(240, 248, 255, 0.904);" aria-current="page" href="{% url 'logout' %}">{{user.username}}  | Cerrar Sesion </a>
+        {% else %}
+        <a class="nav-link" style="color: aliceblue;" aria-current="page" href="{% url 'login' %}">Iniciar Sesion</a>
+        <a class="nav-link" style="color: aliceblue;" aria-current="page" href="{% url 'signup' %}">Registrarme</a>
+        {% endif %}
         </div>
     </div>
     </nav>
@@ -87,10 +89,11 @@
 </main>
 
 <!-- FOOTER -->
-<hr>
-<footer class="container">
-  <p class="float-end"> {% block top %} {% endblock %}</p>
-  <p>© 2020–2023 Ivan Bustos. | <a id="email" target="_blank" href="mailto:ivanbustos2004@gmail.com">Contacto</a> | <a href="https://www.linkedin.com/in/ivan-bustos-33a86b234/">Linkedin</a></p>
+<p style="margin-left: 35px;"> {% block top %} {% endblock %}</p>
+
+<footer class="" style="position: absolute; bottom: 0; width: 100%; padding: 1em;">
+    <hr width="100%">
+  <p style="margin-left: 5px;">© 2020–2023 Ivan Bustos. | <a id="email" target="_blank" href="mailto:ivanbustos2004@gmail.com">Contacto</a> | <a href="https://www.linkedin.com/in/ivan-bustos-33a86b234/">Linkedin</a></p>
 </footer>
 
 <script src="{% static 'Peliculeando/js/bootstrap.bundle.min.js'%}"></script>

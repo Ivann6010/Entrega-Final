@@ -1,10 +1,13 @@
 {% extends "Peliculeando/base.html" %}
 
+{% block title %} {{object.nombre_pelicula}} | Peliculeando! {% endblock %}
+
 {% block main %}
-<div>
+<div style="margin-left: 20px; width: 95%;">
  <br>
-<h2>{{object.nombre_pelicula}} | {{object.fecha_estreno}}</h2> <h6>{{object.reseña_pelicula}}</h6>
+<h2>{{object.nombre_pelicula}} | {{object.año_estreno}}</h2> <h6>{{object.reseña_pelicula}}</h6>
 <p>"{{object.valoracion_final}}"</p>
 <h5><a href="{% url 'post-list' %}">volver</a></h5>
 </div>
+
 {% endblock %}

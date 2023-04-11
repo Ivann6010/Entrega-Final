@@ -26,4 +26,7 @@ urlpatterns = [
     path('post/detail/<pk>', PostDetail.as_view(), name="post-detail"),
     path('post/update/<pk>', PostUpdate.as_view(), name="post-update"),
     path('post/delete/<pk>', PostDelete.as_view(), name="post-delete"),
+    path('signup/', SignUp.as_view(), name="signup"),
+    path('login/', Login.as_view(), name="login"),
+    path('logout/', Logout.as_view(), name="logout"),
 ]

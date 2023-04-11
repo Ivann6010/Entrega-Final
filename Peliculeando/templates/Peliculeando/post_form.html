@@ -1,11 +1,14 @@
 {% extends "Peliculeando/base.html" %}
 
+{% block title %} Postear | Peliculeando! {% endblock %}
+
 {% block main %}
+<div style="margin-left: 10px;">
 <br>
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="Guardar">
 </form>
-
+</div>
 {% endblock %}

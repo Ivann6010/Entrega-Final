@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre_pelicula', models.CharField(max_length=40)),
-                ('fecha_estreno', models.IntegerField(validators=[django.core.validators.MinValueValidator(1895), django.core.validators.MaxValueValidator(2023)])),
+                ('año_estreno', models.IntegerField(validators=[django.core.validators.MinValueValidator(1895), django.core.validators.MaxValueValidator(2023)])),
                 ('reseña_pelicula', models.CharField(max_length=800)),
                 ('valoracion_final', models.CharField(max_length=50)),
             ],
