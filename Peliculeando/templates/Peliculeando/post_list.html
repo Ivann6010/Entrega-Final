@@ -9,7 +9,7 @@
         
         <h3>{{post.nombre_pelicula}} ({{post.año_estreno}})</h3>
         <a href="{% url 'post-detail' post.id %}"> Detalle</a>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and post.autorizado.id == user.id %}
         | <a href="{% url 'post-update' post.id%}">Actualizar</a> | <a href="{% url 'post-delete' post.id%}">Borrar</a>
         {% endif %}
         <hr width="250px"><li></li>
