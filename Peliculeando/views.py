@@ -4,7 +4,7 @@ from Peliculeando.models import *
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import *
 
 # Create your views here.
 
@@ -23,14 +23,30 @@ class PostCreate(LoginRequiredMixin, CreateView):
     fields = '__all__'
     success_url = reverse_lazy('post-list')
 
-class PostUpdate(LoginRequiredMixin, UpdateView):
+class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = '__all__'
     success_url = reverse_lazy('post-list')
 
-class PostDelete(LoginRequiredMixin ,DeleteView):
+    def test_func(self):
+        user_id = self.request.user.id
+        post_id = self.kwargs.get('pk')
+        return Post.objects.filter(autorizado=user_id, id=post_id).exists()
+
+    def handle_no_permission(self):
+        return render(self.request, "Peliculeando/not_found.html")
+
+class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('post-list')
+
+    def test_func(self):
+        user_id = self.request.user.id
+        post_id = self.kwargs.get('pk')
+        return Post.objects.filter(autorizado=user_id, id=post_id).exists()
+
+    def handle_no_permission(self):
+        return render(self.request, "Peliculeando/not_found.html")
 
 class SignUp(CreateView):
     form_class = UserCreationForm
