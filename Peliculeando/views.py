@@ -20,12 +20,17 @@ class PostDetail(DetailView):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = '__all__'
+    fields = ['nombre_pelicula','año_estreno','reseña_pelicula','valoracion_final','imagen']
     success_url = reverse_lazy('post-list')
+    
+    def form_valid(self, form):
+        form.instance.autorizado = self.request.user
+        return super().form_valid(form)
+
 
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = '__all__'
+    fields = ['nombre_pelicula','año_estreno','reseña_pelicula','valoracion_final','imagen']
     success_url = reverse_lazy('post-list')
 
     def test_func(self):
@@ -51,10 +56,27 @@ class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class SignUp(CreateView):
     form_class = UserCreationForm
     template_name = "registration/signup.html"
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('login')
     
 class Login(LoginView):
-    next_page = reverse_lazy("post-list")
+    next_page = reverse_lazy("index")
 
 class Logout(LogoutView):
     template_name = "registration/logout.html"
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+    model = Profile
+    fields = ['genero_preferido','imagen','pelicula_preferida']
+    success_url = reverse_lazy('post-list')
+
+class ProfileCreate(LoginRequiredMixin, CreateView):
+    model = Profile
+    fields = ['genero_preferido','imagen','pelicula_preferida']
+    success_url = reverse_lazy('post-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ProfileDetail(DetailView):
+    model = Profile

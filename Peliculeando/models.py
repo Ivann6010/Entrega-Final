@@ -13,7 +13,16 @@ class Post(models.Model):
     reseña_pelicula = models.CharField(max_length=800)
     valoracion_final = models.CharField(max_length=50) 
     autorizado = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="autorizado")
-    imagen = models.ImageField(upload_to="img", null=True, blank=True)
+    imagen = models.ImageField(upload_to="img")
 
     def __str__(self):
         return f"{self.id} - {self.nombre_pelicula} ({self.año_estreno})"
+
+class Profile(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name="profile")
+    genero_preferido = models.CharField(max_length=100)
+    imagen = models.ImageField(upload_to="img-pro")
+    pelicula_preferida = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.id} - {self.user}"

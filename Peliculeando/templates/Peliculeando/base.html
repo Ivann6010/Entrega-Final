@@ -74,7 +74,12 @@
             </li> -->
         </ul>
         {% if user.is_authenticated %}
-        <a class="nav-link" style="color: rgba(240, 248, 255, 0.904);" aria-current="page" href="{% url 'logout' %}">{{user.username}}  | Cerrar Sesion </a>
+            {% if user.profile %}
+            <a class="nav-link" style="color: rgba(240, 248, 255, 0.904);" aria-current="page" href="{% url 'profile-detail' user.profile.id %}"> <img src="{{user.profile.imagen.url}}" height="30px" style="margin-right: 10px; border-radius: 100px;"> {{user.username}} </a>
+            {% else %}
+            <a class="nav-link" style="color: rgba(240, 248, 255, 0.904);" aria-current="page" href="{% url 'profile-create' %}"> {{user.username}} | Crear Perfil </a>
+            <a class="nav-link" style="color: aliceblue;" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>
+            {% endif %}
         {% else %}
         <a class="nav-link" style="color: aliceblue;" aria-current="page" href="{% url 'login' %}">Iniciar Sesion</a>
         <a class="nav-link" style="color: aliceblue;" aria-current="page" href="{% url 'signup' %}">Registrarme</a>
@@ -91,9 +96,9 @@
 </main>
 
 <!-- FOOTER -->
-<p style="margin-left: 35px;">{% block top %} {% endblock %}</p>
 
-<footer class="" style="position: absolute; bottom: 0; width: 100%; padding: 1em;">
+
+<footer style="position: absolute; bottom: 0; width: 100%; padding: 1em;">
     <hr width="100%">
   <p style="margin-left: 5px;">© 2020–2023 Ivan Bustos. | <a id="email" target="_blank" href="mailto:ivanbustos2004@gmail.com">Contacto</a> | <a href="https://www.linkedin.com/in/ivan-bustos-33a86b234/">Linkedin</a></p>
 </footer>
