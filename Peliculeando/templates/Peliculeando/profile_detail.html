@@ -12,7 +12,8 @@
     <br>
     {% if object.user.id == user.id %}
     <button style="background-color: rgb(25, 10, 85); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'profile-update' object.id %}"> Editar Perfil </a></button>
-    <button style="background-color: rgb(104, 6, 6); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion </a></button>
+    <button style="background-color: rgb(104, 6, 6); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'profile-delete' object.id %}">Eliminar Perfil </a></button> <br>
+    <button style="background-color: rgb(24, 104, 13); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion </a></button>
     {% endif %}
 </div>
 {% endblock %}

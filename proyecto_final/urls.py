@@ -20,20 +20,25 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # admin
     path('admin/', admin.site.urls),
-    
+    # index
     path('', index, name="index"),
+    # registro user
+    path('signup/', SignUp.as_view(), name="signup"),
+    path('login/', Login.as_view(), name="login"),
+    path('logout/', Logout.as_view(), name="logout"),
+    # post crud
     path('post/list', PostList.as_view(), name="post-list"),
     path('post/create', PostCreate.as_view(), name="post-create"),
     path('post/detail/<pk>', PostDetail.as_view(), name="post-detail"),
     path('post/update/<pk>', PostUpdate.as_view(), name="post-update"),
     path('post/delete/<pk>', PostDelete.as_view(), name="post-delete"),
-    path('signup/', SignUp.as_view(), name="signup"),
-    path('login/', Login.as_view(), name="login"),
-    path('logout/', Logout.as_view(), name="logout"),
-    path('profile/update/<pk>', ProfileUpdate.as_view(), name="profile-update"),
+    # profile crud
     path('profile/create', ProfileCreate.as_view(), name="profile-create"),
+    path('profile/update/<pk>', ProfileUpdate.as_view(), name="profile-update"),
     path('profile/detail/<pk>', ProfileDetail.as_view(), name="profile-detail"),
+    path('profile/delete/<pk>', ProfileDelete.as_view(), name="profile-delete"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

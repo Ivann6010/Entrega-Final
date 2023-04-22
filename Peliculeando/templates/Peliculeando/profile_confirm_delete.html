@@ -1,0 +1,15 @@
+{% extends "Peliculeando/base.html" %}
+
+{% block main %}
+<br> <br>
+<div style="margin-left: 10px;">
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+
+    <h3>Seguro que deseas borrar tu perfil?<input style="margin-left: 40px;" type="submit" value="Borrar"></h3> <hr>
+    <h4><em> (Sin perfil no podras interactuar, por más que estés registrado)</em></h4>
+    
+</form>
+</div>
+{% endblock %}

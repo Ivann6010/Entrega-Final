@@ -10,6 +10,7 @@
             <img src="{{post.imagen.url}}" width="250px" style="margin-bottom: 10px;">
             <br>
         <h3>{{post.nombre_pelicula}} ({{post.año_estreno}})</h3>
+        <em>reseñado por @{{post.autorizado}}</em> <br>
         <a href="{% url 'post-detail' post.id %}"> Detalle</a>
         {% if user.is_authenticated and post.autorizado.id == user.id %}
         | <a href="{% url 'post-update' post.id%}">Actualizar</a> | <a href="{% url 'post-delete' post.id%}">Borrar</a>

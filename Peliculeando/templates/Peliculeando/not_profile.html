@@ -1,0 +1,19 @@
+{% extends "Peliculeando/base.html" %}
+
+{% block title %} Error | Peliculeando! {% endblock %}
+
+{% block main %}
+<hr><br>
+<div style="margin-left: 20px;">
+{% if user.is_authenticated %}
+    <h1> Debes tener un perfil activo para acceder a esta función!</h1> <br>
+    <h4><em>Puedes crearlo en el apartado "Crear Perfil"</em></h4><br>
+    <button style="background-color: rgb(104, 6, 6); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'profile-create' %}"> Crear Perfil </a></button>
+{% else %}
+    <h1> Debes estar registrado y poseer un perfil para acceder a esta función</h1> <br>
+    <h4><em>Si tienes cuenta puedes iniciar sesión. Si no puedes registrarte en el apartado "Registrarme", y luego crear un perfil.</em></h4><br>
+    <button style="background-color: rgb(104, 6, 6); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'signup' %}"> Registrarme </a></button> O puedes
+    <button style="background-color: rgb(25, 10, 85); margin-bottom: 5%;"><a style="color: rgb(255, 255, 255); text-decoration: none; font-weight: 600;" aria-current="page" href="{% url 'login' %}"> Iniciar Sesion </a></button> 
+{% endif %}
+</div>
+{% endblock %}
