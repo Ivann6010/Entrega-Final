@@ -1,0 +1,14 @@
+{% extends "Peliculeando/base.html" %}
+
+{% block title %} Mensajería | Peliculeando! {% endblock %}
+
+{% block main %}
+<div style="margin-left: 10px;">
+<br> <br> <h2>Envía un mensaje</h2> <br>
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Enviar">
+</form>
+</div>
+{% endblock %}

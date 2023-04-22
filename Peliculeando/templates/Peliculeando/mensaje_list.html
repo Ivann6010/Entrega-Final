@@ -1,0 +1,27 @@
+{% extends "Peliculeando/base.html" %}
+
+{% block title %} Mensajería | Peliculeando! {% endblock %}
+
+{% block main %}
+<br><br>
+<div style="margin-left: 15px;">
+
+    <h1><a href="{% url 'mensaje-create' %}" style="color: rgb(61, 13, 77); text-decoration: none;">Envíar Mensaje</a></h1>
+    <hr width="270px">
+
+    {% if not mensajes %}
+    <h2>Por ahora no tienes mensajes:</h2> <br>
+    {% else %}
+    <h2>Tus mensajes:</h2> <br>
+    {% endif %}
+
+    <ul>
+    {% for mensaje in mensajes %}
+    <li><h3>{{mensaje.email}} | {{mensaje.titulo}} </h3>
+    <p>{{mensaje.mensaje}}</p></li>
+    {% endfor %} <br>
+    </ul>
+
+</div>
+<br>
+{% endblock %}

@@ -123,3 +123,12 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
 
 class ProfileDetail(DetailView):
     model = Profile
+
+class MensajeCreate(CreateView):
+    model = Mensaje
+    fields = "__all__"
+    success_url = reverse_lazy('index')
+
+class MensajeList(ListView):
+    model = Mensaje
+    context_object_name = "mensajes"

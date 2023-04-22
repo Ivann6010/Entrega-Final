@@ -10,7 +10,7 @@ class Post(models.Model):
     año_estreno = models.IntegerField(validators=[
         MinValueValidator(1895),
         MaxValueValidator(timezone.now().year)])
-    reseña_pelicula = models.CharField(max_length=800)
+    reseña_pelicula = models.TextField(max_length=800)
     valoracion_final = models.CharField(max_length=50) 
     autorizado = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="autorizado")
     imagen = models.ImageField(upload_to="img")
@@ -27,3 +27,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.id} - {self.user}"
+
+class Mensaje(models.Model):
+    titulo = models.CharField(max_length=40)
+    mensaje = models.TextField(max_length=1000)
+    email = models.EmailField()
+    receptor = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="receptor")

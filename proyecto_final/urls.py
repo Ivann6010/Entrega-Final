@@ -41,6 +41,9 @@ urlpatterns = [
     path('profile/update/<pk>', ProfileUpdate.as_view(), name="profile-update"),
     path('profile/detail/<pk>', ProfileDetail.as_view(), name="profile-detail"),
     path('profile/delete/<pk>', ProfileDelete.as_view(), name="profile-delete"),
+    # mensajes
+    path('mensaje/create', MensajeCreate.as_view(), name="mensaje-create"),
+    path('mensaje/list', MensajeList.as_view(), name="mensaje-list"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
