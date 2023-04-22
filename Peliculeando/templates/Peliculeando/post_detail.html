@@ -11,10 +11,19 @@
     </div>
     <div style="display: inline-block;">
         <h2 style="display: inline-block; margin-right: 10px;">{{object.nombre_pelicula}} | {{object.año_estreno}}</h2>
-        <p style="display: inline-block; vertical-align: text-top;"><em> reseñado por <a style="color: rgb(0, 0, 0); font-weight: 500 ; text-decoration: none;" aria-current="page" href="{% url 'profile-detail' object.autorizado.profile.id %}">@{{object.autorizado}}</a></em></p>
+        <p style="display: inline-block; vertical-align: text-top;"><em>reseñado por 
+            {% if post.autorizado.profile %}
+                <a style="color: rgb(0, 0, 0); font-weight: 500; text-decoration: none;" aria-current="page" href="{% url 'profile-detail' post.autorizado.profile.id %}">@{{ post.autorizado }}</a>
+            {% else %}
+                <span style="color: rgb(106, 6, 6);">{{ post.autorizado }} </span>
+            {% endif %}
+            -- {{post.creado_el}}</em></p>
     </div>
     <h6>{{object.reseña_pelicula}}</h6>
     <p>"{{object.valoracion_final}}"</p>
+    {% if user.is_authenticated and post.autorizado.id == user.id %}
+    <a href="{% url 'post-update' post.id%}" style="text-decoration: none;">Actualizar</a> | <a href="{% url 'post-delete' post.id%}" style="text-decoration: none;">Borrar</a> <br><br>
+    {% endif %}
     <h5><a href="{% url 'post-list' %}">volver</a></h5>
 </div>
 

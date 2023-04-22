@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
+    #about
+    path('about/', about, name="about"),
     # index
     path('', index, name="index"),
     # registro user

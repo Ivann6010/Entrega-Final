@@ -63,7 +63,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'post-list' %}">Feed  </a>
+            <a class="nav-link" aria-current="page" href="{% url 'post-list' %}">Mi Feed  </a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="{% url 'post-create' %}">Postear  </a>
@@ -99,7 +99,7 @@
 
 <footer style="position: absolute; bottom: 0; width: 100%; padding: 1em;">
     <hr width="100%">
-  <p style="margin-left: 5px;">© 2020–2023 Ivan Bustos. | <a id="email" target="_blank" href="mailto:ivanbustos2004@gmail.com">Contacto</a> | <a href="https://www.linkedin.com/in/ivan-bustos-33a86b234/">Linkedin</a></p>
+  <p style="margin-left: 5px;">© 2020–2023 Ivan Bustos. | <a style="text-decoration: none;" aria-current="page" href="{% url 'about' %}">Sobre Mi</a> | <a id="email" target="_blank" href="mailto:ivanbustos2004@gmail.com" style="text-decoration: none;">Contacto</a> | <a href="https://www.linkedin.com/in/ivan-bustos-33a86b234/" style="text-decoration: none;">Linkedin</a></p>
 </footer>
 
 <script src="{% static 'Peliculeando/js/bootstrap.bundle.min.js'%}"></script>

@@ -8,12 +8,29 @@ from django.contrib.auth.mixins import *
 
 # Create your views here.
 
-def index(request):
-    return render(request, "Peliculeando/index.html")
+def about(request):
+    return render(request, "Peliculeando/about.html")
 
-class PostList(ListView):
+def index(request):
+    context = {
+        "posts":Post.objects.all()
+    }
+    return render(request, "Peliculeando/index.html", context)
+
+class PostList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Post
     context_object_name = "posts"
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset().filter(autorizado=user)
+        return queryset
+
+    def test_func(self):
+        return hasattr(self.request.user, 'profile')
+
+    def handle_no_permission(self):
+        return render(self.request, "Peliculeando/not_profile.html")
 
 class PostDetail(DetailView):
     model = Post
@@ -49,7 +66,7 @@ class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('index')
 
     def test_func(self):
         user_id = self.request.user.id
@@ -73,7 +90,7 @@ class Logout(LogoutView):
 class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     fields = ['genero_preferido','imagen','pelicula_preferida']
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('index')
 
     def test_func(self):
         user_id = self.request.user.id
@@ -85,7 +102,7 @@ class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ProfileDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Profile
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('index')
 
     def test_func(self):
         user_id = self.request.user.id
@@ -98,7 +115,7 @@ class ProfileDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class ProfileCreate(LoginRequiredMixin, CreateView):
     model = Profile
     fields = ['genero_preferido','imagen','pelicula_preferida']
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         form.instance.user = self.request.user

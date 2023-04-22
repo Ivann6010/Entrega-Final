@@ -5,19 +5,30 @@
 {% block main %}
 <br><br>
 <ul style="list-style: none;">
+    
     {% for post in posts %}
         <div>
             <img src="{{post.imagen.url}}" width="250px" style="margin-bottom: 10px;">
             <br>
         <h3>{{post.nombre_pelicula}} ({{post.año_estreno}})</h3>
-        <em>reseñado por @{{post.autorizado}}</em> <br>
-        <a href="{% url 'post-detail' post.id %}"> Detalle</a>
+        <p style="display: inline-block; vertical-align: text-top;"><em>reseñado por 
+            {% if post.autorizado.profile %}
+                <a style="color: rgb(0, 0, 0); font-weight: 500; text-decoration: none;" aria-current="page" href="{% url 'profile-detail' post.autorizado.profile.id %}">@{{ post.autorizado }}</a>
+            {% else %}
+                <span style="color: rgb(106, 6, 6);">{{ post.autorizado }} </span>
+            {% endif %}
+            </em></p><br>
+        <a href="{% url 'post-detail' post.id %}" style="text-decoration: none;"> Leer reseña</a>
         {% if user.is_authenticated and post.autorizado.id == user.id %}
-        | <a href="{% url 'post-update' post.id%}">Actualizar</a> | <a href="{% url 'post-delete' post.id%}">Borrar</a>
+        | <a href="{% url 'post-update' post.id%}" style="text-decoration: none;">Actualizar</a> | <a href="{% url 'post-delete' post.id%}" style="text-decoration: none;">Borrar</a>
         {% endif %}
         <hr width="250px"><li></li>
         {% endfor %}
-        <h6 style="margin-bottom: 25px;">Ya no hay publicaciones</h6>
+        {% if not posts%}
+        <h2 style="color: rgb(64, 5, 5);">Aún no tienes publicaciones</h2>
+        {% else %}
+        <h6 style="margin-bottom: 25px;">No hay más publicaciones actualmente</h6>
+        {% endif %}
 </ul>
-
+<br>
 {% endblock %}
