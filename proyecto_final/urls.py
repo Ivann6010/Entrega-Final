@@ -44,6 +44,7 @@ urlpatterns = [
     # mensajes
     path('mensaje/create', MensajeCreate.as_view(), name="mensaje-create"),
     path('mensaje/list', MensajeList.as_view(), name="mensaje-list"),
+    path('mensaje/delete/<pk>', MensajeDelete.as_view(), name="mensaje-delete"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

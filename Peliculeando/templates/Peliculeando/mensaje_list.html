@@ -10,14 +10,14 @@
     <hr width="270px">
 
     {% if not mensajes %}
-    <h2>Por ahora no tienes mensajes:</h2> <br>
+    <h2>Por ahora no tienes mensajes</h2> <br>
     {% else %}
     <h2>Tus mensajes:</h2> <br>
     {% endif %}
 
     <ul>
     {% for mensaje in mensajes %}
-    <li><h3>{{mensaje.email}} | {{mensaje.titulo}} </h3>
+    <li><h3>{{mensaje.email}} | {{mensaje.titulo}} -- <a href="{% url 'mensaje-delete' mensaje.id%}" style="text-decoration: none; color: rgb(96, 22, 22);">Borrar</a></h3>
     <p>{{mensaje.mensaje}}</p></li>
     {% endfor %} <br>
     </ul>

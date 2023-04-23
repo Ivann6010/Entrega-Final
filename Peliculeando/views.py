@@ -124,11 +124,29 @@ class ProfileCreate(LoginRequiredMixin, CreateView):
 class ProfileDetail(DetailView):
     model = Profile
 
-class MensajeCreate(CreateView):
+class MensajeCreate(LoginRequiredMixin, CreateView):
     model = Mensaje
     fields = "__all__"
     success_url = reverse_lazy('index')
 
-class MensajeList(ListView):
+class MensajeList(LoginRequiredMixin, ListView):
     model = Mensaje
     context_object_name = "mensajes"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(receptor=self.request.user)
+        return queryset
+
+class MensajeDelete (LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Mensaje
+    context_object_name = "mensajes"
+    success_url = reverse_lazy("mensaje-list")
+
+    def test_func(self):
+        user_id = self.request.user.id
+        mensaje_id = self.kwargs.get('pk')
+        return Mensaje.objects.filter(receptor=user_id).exists()
+
+    def handle_no_permission(self):
+        return render(self.request, "Peliculeando/not_found.html")

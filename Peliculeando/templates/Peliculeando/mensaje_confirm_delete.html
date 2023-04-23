@@ -1,0 +1,16 @@
+{% extends "Peliculeando/base.html" %}
+
+{% block main %}
+<br> <br>
+<div style="margin-left: 10px;">
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+
+    
+    <h2>Seguro que deseas borrar el mensaje? <input style="margin-left: 40px;" type="submit" value="Borrar"></h2>
+    
+    
+</form>
+</div>
+{% endblock %}

@@ -11,7 +11,7 @@ class Post(models.Model):
         MinValueValidator(1895),
         MaxValueValidator(timezone.now().year)])
     reseña_pelicula = models.TextField(max_length=800)
-    valoracion_final = models.CharField(max_length=50) 
+    valoracion_final = models.CharField(max_length=100) 
     autorizado = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="autorizado")
     imagen = models.ImageField(upload_to="img")
     creado_el = models.DateTimeField(auto_now_add = True)
@@ -33,3 +33,4 @@ class Mensaje(models.Model):
     mensaje = models.TextField(max_length=1000)
     email = models.EmailField()
     receptor = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="receptor")
+
