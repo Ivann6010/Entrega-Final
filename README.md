@@ -1,5 +1,5 @@
 # Trabajo Final | Bustos Ivan | #40425
-## Link de Video:
+## Link de Video: https://www.youtube.com/watch?v=_2rUq5RtERc&ab_channel=IvanBustos
 
 ### Metodología
 El programa es un Blog de Reseñas de Películas funcional. Yo no borré la DB ni la carpeta MEDIA, pero tengo entendido que eso se hace, por lo tanto al ingresar por primera vez entrarás al Index donde no habrá ningun posteo de reviews, al igual que en las listas. Para empezar a llenar, un usuario debe crear los distintos Posts. 
